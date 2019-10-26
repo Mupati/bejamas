@@ -1,0 +1,61 @@
+// Colors
+$white: #ffffff;
+$color-2: #4285bc;
+$color-3: #e3e3e3;
+$color-4: #394e5d;
+$dark: #182333;
+$color-6: #394e5d36;
+$color-7: #0000001d;
+$color-8: #4684b9;
+$color-9: #468db9;
+$color-10: #a0cc4d;
+$color-11: #f5f8fa;
+$color-12: #4296cb;
+
+* {
+  padding: 0;
+  margin: 0;
+}
+a {
+  text-decoration: none;
+}
+
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60px;
+  box-shadow: 0px 2px 12px $color-7;
+  ul {
+    li {
+      display: inline-block;
+      list-style: none;
+    }
+  }
+}
+
+// Homepage
+#hero,
+#intro-text {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+// Footer Styles
+footer {
+  color: $white;
+  background: $color-12;
+  height: 60px;
+  width: 100%;
+}
+
+// utility classes
+.hide {
+  display: none;
+}
+.text-center {
+  text-align: center;
+}
+
+// Responsive

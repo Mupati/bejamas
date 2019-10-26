@@ -1,0 +1,92 @@
+backend:
+  name: git-gateway
+  repo: master
+
+media_folder: static/uploads
+public_folder: /uploads
+
+collections:
+  - name: 'blog'
+    label: 'Blog'
+    folder: 'src/pages/blog'
+    create: true
+    slug: '{{year}}-{{month}}-{{day}}-{{slug}}'
+    fields:
+      - { label: 'Template Key', name: 'templateKey', widget: 'hidden', default: 'blog-post' }
+      - { label: 'Title', name: 'title', widget: 'string' }
+      - { label: 'Publish Date', name: 'date', widget: 'datetime' }
+      - { label: 'Excerpt', name: 'excerpt', widget: 'text' }
+      - { label: 'Featured Image', name: 'featuredimage', widget: image }
+      - { label: 'Body', name: 'body', widget: 'markdown' }
+
+  - name: 'pages'
+    label: 'Pages'
+    files:
+      - file: 'src/pages/index.md'
+        label: 'Index Page'
+        name: 'index'
+        fields:
+          - { label: 'Template Key', name: 'templateKey', widget: 'hidden', default: 'index-page' }
+          - { label: Title, name: title, widget: string }
+          - {
+              label: Hero,
+              name: hero,
+              widget: object,
+              fields:
+                [
+                  { label: Heading, name: heading, widget: string },
+                  { label: Subheading, name: subheading, widget: text },
+                  { label: Image, name: image, widget: image },
+                ],
+            }
+          - {
+              label: Intro,
+              name: intro,
+              widget: object,
+              fields:
+                [
+                  { label: Heading, name: heading, widget: string },
+                  { label: Description, name: description, widget: markdown },
+                  { label: Image, name: image, widget: image },
+                ],
+            }
+          - label: 'Logos'
+            name: 'logos'
+            widget: 'list'
+            fields:
+              - { label: Image, name: image, widget: image }
+              - { label: Link, name: link, widget: string }
+
+      - file: 'src/pages/about/index.md'
+        label: 'About'
+        name: 'about'
+        fields:
+          - { label: 'Template Key', name: 'templateKey', widget: 'hidden', default: 'about-page' }
+          - { label: 'Title', name: 'title', widget: 'string' }
+          - { label: 'Body', name: 'body', widget: 'markdown' }
+
+      - file: 'src/pages/contact/index.md'
+        label: 'Contact'
+        name: 'contact'
+        fields:
+          - {
+              label: 'Template Key',
+              name: 'templateKey',
+              widget: 'hidden',
+              default: 'contact-page',
+            }
+          - { label: 'Title', name: 'title', widget: 'string' }
+          - { label: 'Body', name: 'body', widget: 'markdown' }
+
+      - file: 'src/pages/products/index.md'
+        label: 'Products Page'
+        name: 'products'
+        fields:
+          - {
+              label: 'Template Key',
+              name: 'templateKey',
+              widget: 'hidden',
+              default: 'product-page',
+            }
+          - { label: 'Title', name: 'title', widget: 'string' }
+          - { label: 'Body', name: 'body', widget: 'markdown' }
