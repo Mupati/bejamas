@@ -8,7 +8,7 @@ hero:
     Vivamus vestibulum elit efficitur, elementum sapien a, aliquet ipsum
 intro:
   description: >-
-    ## New Product, new Story
+    #### New Product, new Story
 
 
     Vivamus vestibulum elit efficitur, elementum sapien a, aliquet ipsum. Fusce
