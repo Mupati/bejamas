@@ -19,23 +19,18 @@ export function IndexPageTemplate({
           <p className="hero--subheading">{heroSubheading}</p>
         </div>
         <div className="hero--image">
-          <img
-            src={heroImage.childImageSharp.fluid.src}
-            alt="hero"
-            height="371"
-            width="384"
-          />
+          <img src={heroImage.childImageSharp.fluid.src} alt="hero" />
         </div>
       </section>
       <section id="intro">
-        <h3 className="text-center">{introHeading}</h3>
+        <h3 className="intro--heading text-center">{introHeading}</h3>
         <div id="intro-text">
-          <img
-            src={introImage.childImageSharp.fluid.src}
-            alt="introduction"
-            width="236"
-            height="370"
-          />
+          <div className="intro--image">
+            <img
+              src={introImage.childImageSharp.fluid.src}
+              alt="introduction"
+            />
+          </div>
           <article>{introDescription}</article>
         </div>
       </section>
