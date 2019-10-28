@@ -1,27 +1,28 @@
 import React from "react";
-import { Link } from "gatsby";
 
-const SinglePost = ({ data }) => {
-  const { frontmatter } = data.markdownRemark;
-  return <h3>{frontmatter.date}</h3>;
+const SinglePost = ({ thumbnail, title, excerpt }) => {
+  return (
+    <article className="single--post">
+      <div
+        className="post-preview--thumbnail"
+        style={{
+          backgroundImage: `url(${thumbnail})`,
+          backgroundPosition: "center",
+          backgroundSize: "cover",
+          borderRadius: "4px",
+        }}
+      ></div>
+      <div className="post-preview--content">
+        <h1>{title}</h1>
+        <p>{excerpt}</p>
+      </div>
+    </article>
+    // <article>
+    //   <img src={thumbnail} alt="kofi" />
+    //   <h3>{title}</h3>
+    //   <p>{excerpt}</p>
+    // </article>
+  );
 };
 
 export default SinglePost;
-
-export const blogQuery = graphql`
-  query SinglePost {
-    allMarkdownRemark(
-      filter: { frontmatter: { templateKey: { eq: "blog-post" } } }
-    ) {
-      edges {
-        node {
-          frontmatter {
-            excerpt
-            date
-            title
-          }
-        }
-      }
-    }
-  }
-`;

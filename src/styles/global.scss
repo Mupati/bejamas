@@ -81,7 +81,7 @@ header {
 // Homepage
 #hero,
 #intro,
-#intro-text {
+#blog-posts {
   padding: 0 15%;
 }
 #hero,
@@ -114,6 +114,7 @@ header {
 
 .intro--heading {
   font: 700 32px/39px "Montserrat";
+  text-align: center;
   color: $color-4;
   margin-bottom: 20.5px;
 }
@@ -125,19 +126,92 @@ header {
     }
   }
   article {
-    width: 545px;
-    text-align: left;
-    font: 400 18px/33px "Montserrat";
-    color: $dark;
+    h4 {
+      font: 700 20px/24px "Montserrat";
+      color: $color-4;
+      margin-bottom: 17.5px;
+    }
+    p {
+      width: 545px;
+      text-align: left;
+      font: 400 18px/33px "Montserrat";
+      color: $dark;
+    }
   }
 }
+
 // Footer Styles
 footer {
-  color: $white;
+  display: flex;
+  align-items: center;
   background: $color-12;
   height: 60px;
   width: 100%;
-  // margin-top: -60px;
+  .logo {
+    margin-left: 143px;
+    img {
+      height: 32px;
+      width: 29px;
+    }
+  }
+  p {
+    color: $white;
+    font: 700 14px/18px "Montserrat";
+    margin-left: 50px;
+  }
+}
+
+// Blog Posts
+#blog-posts {
+  margin-bottom: 64px;
+}
+// Single Blog Preview
+// .post-preview {
+//   box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.2);
+//   margin: 10px 20%;
+// }
+// .post-preview:hover {
+//   box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.5);
+// }
+article {
+  &.single--post {
+    display: flex;
+    flex-direction: column;
+    width: 282px;
+    height: 255px;
+  }
+  .post-preview--thumbnail {
+    height: 144px;
+    width: 100%;
+  }
+  .post-preview--content {
+    width: 100%;
+    text-align: left;
+    h1 {
+      margin: 27px 0 9px;
+      color: $dark;
+      font: 600 20px/27px "Montserrat";
+    }
+    p {
+      color: $color-4;
+      font: 400 16px/19px "Montserrat";
+    }
+  }
+}
+
+// Read More Button
+#more-button {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 145px;
+  .read-more {
+    background: $white 0% 0% no-repeat padding-box;
+    border: 1px solid #3d86bf;
+    border-radius: 32px;
+    padding: 10px 30.5px;
+    font: 600 14px/27px "Montserrat";
+    color: $color-2;
+  }
 }
 
 // utility classes
@@ -151,6 +225,18 @@ footer {
 // Responsive
 @media screen and (min-width: 780px) {
   .hide-on-laptop {
+    display: none;
+  }
+  // Partner Logos
+  #partners-laptop {
+    display: flex;
+    justify-content: space-evenly;
+    background: $color-11 0% 0% no-repeat padding-box;
+    margin: 208px 0 183px;
+    height: 145px;
+  }
+
+  #partners-mobile {
     display: none;
   }
 }
@@ -196,7 +282,12 @@ footer {
 
   .intro--heading {
     font: 700 26px/32px "Montserrat";
-    letter-spacing: 0;
+    margin-bottom: 57px;
+    text-align: left;
+  }
+  #intro,
+  #blog-posts {
+    padding: 0 5%;
   }
   #intro-text {
     .intro--image {
@@ -205,8 +296,40 @@ footer {
       }
     }
     article {
+      p {
+        width: 100%;
+        height: 273px;
+        font: 400 16px/29px "Montserrat";
+      }
+    }
+  }
+  #partners-laptop {
+    display: none;
+  }
+  #partners-mobile {
+    display: flex;
+    justify-content: space-evenly;
+    background: $color-11 0% 0% no-repeat padding-box;
+    margin: 45.5px 0 53px;
+    height: 145px;
+  }
+  .carousel {
+    .slide {
+      background: transparent !important;
+    }
+  }
+
+  article {
+    &.single--post {
       width: 334px;
-      font: 400 16px/29px "Montserrat";
+      height: 286px;
+    }
+    .post-preview--thumbnail {
+      height: 169px;
+      width: 100%;
+    }
+    .post-preview--content {
+      width: 100%;
     }
   }
 }

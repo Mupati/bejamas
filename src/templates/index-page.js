@@ -1,6 +1,12 @@
 import React from "react";
-import { graphql } from "gatsby";
+import PropTypes from "prop-types";
+import { graphql, Link } from "gatsby";
 import Layout from "../components/Layout";
+import MarkdownContent from "../components/MarkdownContent";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Carousel } from "react-responsive-carousel";
+import BlogPosts from "../components/BlogPosts";
+// import PreviewCompatibleImage from "../lib/PreviewCompatibleImage";
 
 export function IndexPageTemplate({
   heroHeading,
@@ -23,7 +29,7 @@ export function IndexPageTemplate({
         </div>
       </section>
       <section id="intro">
-        <h3 className="intro--heading text-center">{introHeading}</h3>
+        <h3 className="intro--heading">{introHeading}</h3>
         <div id="intro-text">
           <div className="intro--image">
             <img
@@ -31,19 +37,59 @@ export function IndexPageTemplate({
               alt="introduction"
             />
           </div>
-          <article>{introDescription}</article>
+          <article>
+            <MarkdownContent content={introDescription} />
+          </article>
         </div>
       </section>
-      <section id="logos">
+      <section id="partners-laptop">
         {logos.map((logo, index) => (
-          <img src={logo.image} alt={logo.link} key={index} />
+          <img
+            src={logo.image.publicURL}
+            alt={logo.link}
+            key={index}
+            className="partners"
+          />
         ))}
+      </section>
+      <section id="partners-mobile">
+        <Carousel
+          showThumbs={false}
+          showStatus={false}
+          showIndicators={false}
+          infiniteLoop={true}
+          autoPlay={true}
+        >
+          {logos.map((logo, index) => (
+            <div key={index}>
+              <img
+                src={logo.image.publicURL}
+                alt={logo.link}
+                className="partners"
+              />
+            </div>
+          ))}
+        </Carousel>
+      </section>
+      <section id="blog-posts">
+        <BlogPosts />
+      </section>
+      <section id="more-button">
+        <Link to="/" className="read-more">
+          Read More
+        </Link>
       </section>
     </>
   );
 }
 
-IndexPageTemplate.propTypes = {};
+IndexPageTemplate.propTypes = {
+  heroHeading: PropTypes.string,
+  heroSubheading: PropTypes.string,
+  introHeading: PropTypes.string,
+  introDescription: PropTypes.string,
+  logos: PropTypes.array,
+};
 
 function IndexPage({ data }) {
   const { frontmatter } = data.markdownRemark;
@@ -98,7 +144,9 @@ export const pageQuery = graphql`
           }
         }
         logos {
-          image
+          image {
+            publicURL
+          }
           link
         }
       }
