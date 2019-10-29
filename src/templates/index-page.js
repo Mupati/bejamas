@@ -6,7 +6,7 @@ import MarkdownContent from "../components/MarkdownContent";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 import BlogPosts from "../components/BlogPosts";
-// import PreviewCompatibleImage from "../lib/PreviewCompatibleImage";
+import PreviewCompatibleImage from "../lib/PreviewCompatibleImage";
 
 export function IndexPageTemplate({
   heroHeading,
@@ -25,7 +25,14 @@ export function IndexPageTemplate({
           <p className="hero--subheading">{heroSubheading}</p>
         </div>
         <div className="hero--image">
-          <img src={heroImage.childImageSharp.fluid.src} alt="hero" />
+          <img
+            src={
+              !!heroImage.childImageSharp
+                ? heroImage.childImageSharp.fluid.src
+                : heroImage
+            }
+            alt="hero"
+          />
         </div>
       </section>
       <section id="intro">
@@ -33,7 +40,11 @@ export function IndexPageTemplate({
         <div id="intro-text">
           <div className="intro--image">
             <img
-              src={introImage.childImageSharp.fluid.src}
+              src={
+                !!introImage.childImageSharp
+                  ? introImage.childImageSharp.fluid.src
+                  : introImage
+              }
               alt="introduction"
             />
           </div>
@@ -127,7 +138,7 @@ export const pageQuery = graphql`
           image {
             childImageSharp {
               fluid(maxWidth: 2048, quality: 100) {
-                src
+                ...GatsbyImageSharpFluid
               }
             }
           }

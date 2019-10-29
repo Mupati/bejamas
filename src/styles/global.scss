@@ -13,6 +13,10 @@ $color-10: #a0cc4d;
 $color-11: #f5f8fa;
 $color-12: #4296cb;
 
+%transition {
+  transition: 0.3s ease-out;
+  animation: dissolve;
+}
 @mixin link-bottom($opacity: 1) {
   content: "";
   position: absolute;
@@ -25,8 +29,8 @@ $color-12: #4296cb;
   left: 40%;
   border-top-left-radius: 17px;
   border-top-right-radius: 17px;
+  @extend %transition;
 }
-
 * {
   padding: 0;
   margin: 0;
@@ -63,14 +67,17 @@ header {
       a {
         position: relative;
         color: $color-4;
+        @extend %transition;
         &.active {
           &::after {
+            @extend %transition;
             @include link-bottom();
           }
         }
         &:not(.active):hover {
           &::after {
             @include link-bottom(0.43);
+            @extend %transition;
           }
         }
       }
@@ -163,42 +170,37 @@ footer {
 
 // Blog Posts
 #blog-posts {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(282px, 1fr));
+  grid-gap: 24px;
   margin-bottom: 64px;
-}
-// Single Blog Preview
-// .post-preview {
-//   box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.2);
-//   margin: 10px 20%;
-// }
-// .post-preview:hover {
-//   box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.5);
-// }
-article {
-  &.single--post {
-    display: flex;
-    flex-direction: column;
-    width: 282px;
-    height: 255px;
-  }
-  .post-preview--thumbnail {
-    height: 144px;
-    width: 100%;
-  }
-  .post-preview--content {
-    width: 100%;
-    text-align: left;
-    h1 {
-      margin: 27px 0 9px;
-      color: $dark;
-      font: 600 20px/27px "Montserrat";
-    }
-    p {
-      color: $color-4;
-      font: 400 16px/19px "Montserrat";
-    }
-  }
-}
 
+  article {
+    @extend %transition;
+    &:hover {
+      box-shadow: 0px 2px 16px $color-6;
+      border-radius: 4px;
+    }
+    .post-preview--thumbnail {
+      height: 144px;
+      width: 100%;
+    }
+    .post-preview--content {
+      width: 100%;
+      text-align: left;
+      padding: 0 10px 10px;
+      h1 {
+        margin: 27px 0 9px;
+        color: $dark;
+        font: 600 20px/27px "Montserrat";
+      }
+      p {
+        color: $color-4;
+        font: 400 16px/19px "Montserrat";
+      }
+    }
+  }
+}
 // Read More Button
 #more-button {
   display: flex;
@@ -211,6 +213,11 @@ article {
     padding: 10px 30.5px;
     font: 600 14px/27px "Montserrat";
     color: $color-2;
+    @extend %transition;
+    &:hover {
+      background: $color-2;
+      color: $white;
+    }
   }
 }
 
@@ -224,6 +231,9 @@ article {
 
 // Responsive
 @media screen and (min-width: 780px) {
+  #mobile-nav {
+    display: none;
+  }
   .hide-on-laptop {
     display: none;
   }
@@ -248,6 +258,7 @@ article {
   header {
     justify-content: space-between;
     ul {
+      z-index: 13;
       li {
         min-width: 6em;
         img {
@@ -319,17 +330,52 @@ article {
     }
   }
 
-  article {
-    &.single--post {
-      width: 334px;
-      height: 286px;
+  #blog-posts {
+    grid-template-columns: repeat(auto-fill, minmax(334px, 1fr));
+
+    article {
+      &:nth-last-child(-n + 2) {
+        display: none;
+      }
+      &.single--post {
+        margin-bottom: 36px;
+      }
+      .post-preview--thumbnail {
+        height: 169px;
+        width: 100%;
+      }
+      .post-preview--content {
+        width: 100%;
+      }
     }
-    .post-preview--thumbnail {
-      height: 169px;
-      width: 100%;
+  }
+
+  footer {
+    .logo {
+      margin-left: 80px;
     }
-    .post-preview--content {
-      width: 100%;
+    p {
+      margin-right: 60px;
+    }
+  }
+
+  // Mobile Nav
+  ul#mobile-nav {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    max-height: 100vh;
+    background: $white;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    li {
+      list-style: none;
+      margin-top: 32px;
     }
   }
 }

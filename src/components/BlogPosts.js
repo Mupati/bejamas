@@ -1,18 +1,54 @@
 import React from "react";
-import { Link } from "gatsby";
+import { useStaticQuery } from "gatsby";
 import SinglePost from "../components/SinglePost";
-import thumbnail from "../assets/img/thumbnail.png";
 
-const BlogPosts = () => {
+const BlogPosts = ({ data }) => {
+  const { edges: posts } = data.allMarkdownRemark;
   return (
-    <Link to="/">
+    posts &&
+    posts.map(({ node: post }) => (
       <SinglePost
-        thumbnail={thumbnail}
-        title="Blog #1"
-        excerpt="It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout."
+        thumbnail={post.frontmatter.featuredimage}
+        title={post.frontmatter.title}
+        excerpt={post.excerpt}
+        slug={post.fields.slug}
+        key={post.id}
       />
-    </Link>
+    ))
   );
 };
 
-export default BlogPosts;
+// export default BlogPosts;
+export default () => {
+  const data = useStaticQuery(graphql`
+    query postsQuery {
+      allMarkdownRemark(
+        sort: { order: DESC, fields: [frontmatter___date] }
+        filter: { frontmatter: { templateKey: { eq: "blog-post" } } }
+      ) {
+        edges {
+          node {
+            id
+            excerpt(pruneLength: 40)
+            fields {
+              slug
+            }
+            frontmatter {
+              excerpt
+              date
+              title
+              featuredimage {
+                childImageSharp {
+                  fluid(maxWidth: 120, quality: 100) {
+                    ...GatsbyImageSharpFluid
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  `);
+  return <BlogPosts data={data} />;
+};

@@ -1,27 +1,26 @@
 import React from "react";
+import { Link } from "gatsby";
+import PreviewCompatibleImage from "../lib/PreviewCompatibleImage";
 
-const SinglePost = ({ thumbnail, title, excerpt }) => {
+const SinglePost = ({ thumbnail, title, excerpt, slug }) => {
   return (
     <article className="single--post">
-      <div
-        className="post-preview--thumbnail"
-        style={{
-          backgroundImage: `url(${thumbnail})`,
-          backgroundPosition: "center",
-          backgroundSize: "cover",
-          borderRadius: "4px",
-        }}
-      ></div>
-      <div className="post-preview--content">
-        <h1>{title}</h1>
-        <p>{excerpt}</p>
-      </div>
+      <Link to={slug}>
+        {thumbnail ? (
+          <PreviewCompatibleImage
+            imageInfo={{
+              image: thumbnail,
+              alt: `thumbnail for Post ${title}`,
+            }}
+            className="post-preview--thumbnail"
+          />
+        ) : null}
+        <div className="post-preview--content">
+          <h1>{title}</h1>
+          <p>{excerpt}</p>
+        </div>
+      </Link>
     </article>
-    // <article>
-    //   <img src={thumbnail} alt="kofi" />
-    //   <h3>{title}</h3>
-    //   <p>{excerpt}</p>
-    // </article>
   );
 };
 
