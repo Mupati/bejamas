@@ -39,7 +39,7 @@ body {
   font-family: "Montserrat", sans-serif;
 }
 main {
-  min-height: calc(100vh - 60px);
+  min-height: calc(100vh - 80px);
   padding-top: 20px;
 }
 a {
@@ -53,7 +53,6 @@ header {
   height: 60px;
   box-shadow: 0px 2px 12px $color-7;
   ul {
-    // max-width: 100em;
     display: inherit;
     align-items: center;
     height: inherit;
@@ -169,7 +168,12 @@ footer {
 }
 
 // Blog Posts
-#blog-posts {
+#blog-page {
+  padding: 0 10%;
+  margin-top: 40px;
+}
+#blog-posts,
+#blog-page {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(282px, 1fr));
   grid-gap: 24px;
@@ -241,7 +245,7 @@ footer {
   #partners-laptop {
     display: flex;
     justify-content: space-evenly;
-    background: $color-11 0% 0% no-repeat padding-box;
+    background: $color-11;
     margin: 208px 0 183px;
     height: 145px;
   }
@@ -255,10 +259,19 @@ footer {
   .hide-on-mobile {
     display: none;
   }
+  .mobile-margin {
+    margin-top: 100px;
+    margin-left: 30px;
+  }
   header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
     justify-content: space-between;
+    z-index: 13 !important;
+    background: $white;
     ul {
-      z-index: 13;
       li {
         min-width: 6em;
         img {
@@ -330,9 +343,9 @@ footer {
     }
   }
 
-  #blog-posts {
+  #blog-posts,
+  #blog-page {
     grid-template-columns: repeat(auto-fill, minmax(334px, 1fr));
-
     article {
       &:nth-last-child(-n + 2) {
         display: none;
@@ -368,14 +381,30 @@ footer {
     width: 100%;
     max-height: 100vh;
     background: $white;
-    z-index: 10;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+    z-index: 5;
+    padding-top: 222px;
+    padding-left: 60px;
     li {
       list-style: none;
       margin-top: 32px;
+      a {
+        position: relative;
+        color: $color-4;
+        font: 600 20px/24px "Montserrat";
+        &.mobile-active {
+          &::after {
+            content: "";
+            position: absolute;
+            display: block;
+            background: $color-2;
+            height: 8px;
+            width: 8px;
+            top: 10px;
+            left: -18px;
+            border-radius: 50%;
+          }
+        }
+      }
     }
   }
 }

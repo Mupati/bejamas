@@ -1,25 +1,25 @@
-import React from 'react'
+import React from "react";
 
-import Layout from '../components/Layout'
+import Layout from "../components/Layout";
 
 export function BlogPostTemplate({}) {
   return (
     <>
-      <h1>Blog Post Page</h1>
+      <h1 className="mobile-margin text-center">Blog Post Page</h1>
     </>
-  )
+  );
 }
 
-BlogPostTemplate.propTypes = {}
+BlogPostTemplate.propTypes = {};
 
 function BlogPost() {
   return (
-    <Layout>
+    <Layout title="Blog - Recruit Be">
       <BlogPostTemplate />
     </Layout>
-  )
+  );
 }
 
-BlogPost.propTypes = {}
+BlogPost.propTypes = {};
 
-export default BlogPost
+export default BlogPost;

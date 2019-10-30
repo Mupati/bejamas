@@ -6,7 +6,6 @@ import MarkdownContent from "../components/MarkdownContent";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 import BlogPosts from "../components/BlogPosts";
-import PreviewCompatibleImage from "../lib/PreviewCompatibleImage";
 
 export function IndexPageTemplate({
   heroHeading,
@@ -73,11 +72,13 @@ export function IndexPageTemplate({
         >
           {logos.map((logo, index) => (
             <div key={index}>
-              <img
-                src={logo.image.publicURL}
-                alt={logo.link}
-                className="partners"
-              />
+              <a href={logo.link}>
+                <img
+                  src={logo.image.publicURL}
+                  alt="partner"
+                  className="partners"
+                />
+              </a>
             </div>
           ))}
         </Carousel>
@@ -97,15 +98,17 @@ export function IndexPageTemplate({
 IndexPageTemplate.propTypes = {
   heroHeading: PropTypes.string,
   heroSubheading: PropTypes.string,
+  heroImage: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
   introHeading: PropTypes.string,
   introDescription: PropTypes.string,
+  introImage: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
   logos: PropTypes.array,
 };
 
 function IndexPage({ data }) {
   const { frontmatter } = data.markdownRemark;
   return (
-    <Layout title={frontmatter.title}>
+    <Layout title={`${frontmatter.title} - Recruit Be`}>
       <IndexPageTemplate
         heroHeading={frontmatter.hero.heading}
         heroSubheading={frontmatter.hero.subheading}
@@ -119,7 +122,13 @@ function IndexPage({ data }) {
   );
 }
 
-IndexPage.propTypes = {};
+IndexPage.propTypes = {
+  data: PropTypes.shape({
+    markdownRemark: PropTypes.shape({
+      frontmatter: PropTypes.object,
+    }),
+  }),
+};
 
 export default IndexPage;
 

@@ -1,16 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "gatsby";
-// import NavLinks from "./NavLinks";
 import Logo from "../assets/img/Logo.svg";
 import Burger from "../assets/img/burger.svg";
+import Close from "../assets/img/close.svg";
 
 const TheHeader = () => {
+  const [isMenuOpen, openMenu] = useState(false);
   return (
     <>
       <header>
         <ul>
-          <li className="hide-on-laptop">
-            <img src={Burger} alt="MENU" />
+          <li className="hide-on-laptop" onClick={() => openMenu(!isMenuOpen)}>
+            <img src={isMenuOpen ? Close : Burger} alt="MENU" />
           </li>
           <li className="hide-on-mobile">
             <Link to="/" activeClassName="active">
@@ -37,20 +38,31 @@ const TheHeader = () => {
           </li>
         </ul>
       </header>
-      <ul id="mobile-nav">
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-        <li>
-          <Link to="/products">Products</Link>
-        </li>
-        <li>
-          <Link to="/blog">Blog</Link>
-        </li>
-        <li>
-          <Link to="/contact">Contact</Link>
-        </li>
-      </ul>
+
+      {isMenuOpen && (
+        <ul id="mobile-nav">
+          <li>
+            <Link to="/" activeClassName="mobile-active">
+              Home
+            </Link>
+          </li>
+          <li>
+            <Link to="/products" activeClassName="mobile-active">
+              Products
+            </Link>
+          </li>
+          <li>
+            <Link to="/blog" activeClassName="mobile-active">
+              Blog
+            </Link>
+          </li>
+          <li>
+            <Link to="/contact" activeClassName="mobile-active">
+              Contact
+            </Link>
+          </li>
+        </ul>
+      )}
     </>
   );
 };

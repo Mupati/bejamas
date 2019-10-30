@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "gatsby";
+import PropTypes from "prop-types";
 import PreviewCompatibleImage from "../lib/PreviewCompatibleImage";
 
 const SinglePost = ({ thumbnail, title, excerpt, slug }) => {
@@ -22,6 +23,13 @@ const SinglePost = ({ thumbnail, title, excerpt, slug }) => {
       </Link>
     </article>
   );
+};
+
+SinglePost.propTypes = {
+  thumbnail: PropTypes.object,
+  title: PropTypes.string,
+  excerpt: PropTypes.string,
+  slug: PropTypes.string,
 };
 
 export default SinglePost;

@@ -1,25 +1,25 @@
-import React from 'react'
+import React from "react";
 
-import Layout from '../components/Layout'
+import Layout from "../components/Layout";
 
 export function ProductsPageTemplate({}) {
   return (
     <>
-      <h1>Products Page</h1>
+      <h1 className="mobile-margin text-center">Products Page</h1>
     </>
-  )
+  );
 }
 
-ProductsPageTemplate.propTypes = {}
+ProductsPageTemplate.propTypes = {};
 
 function ProductsPage() {
   return (
-    <Layout>
+    <Layout title={"Products - Recruit Be"}>
       <ProductsPageTemplate />
     </Layout>
-  )
+  );
 }
 
-ProductsPage.propTypes = {}
+ProductsPage.propTypes = {};
 
-export default ProductsPage
+export default ProductsPage;
